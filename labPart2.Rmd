@@ -1,0 +1,94 @@
+---
+title: "Logistic Regression"
+subtitle: "Part II"
+author: "Statistical Inference II"
+date: "April 3, 2018"
+output: html_document
+---
+
+```{r message=FALSE, warning=FALSE}
+library(install.load)
+install_load('tidyverse')
+install_load('titanic')
+```
+
+```{r}
+train <-
+  titanic_train %>%
+  drop_na()
+
+str(train)
+```
+
+**Fit a GLM predicting probability of someone surviving (`Survived`) Titanic based on the amount of money they paid for the `Fare`.**
+
+```{r}
+model <- glm(Survived ~ Fare, family = binomial, data = train)
+sm <- summary(model)
+sm
+```
+
+**What is the estimated probability that someone survived if they paid $7 for the `Fare`?**
+
+```{r}
+exp(model$coefficients[[1]] + model$coefficients[[2]]*7)
+```
+
+**What is the estimated probability that someone survived if they paid $8 for the `Fare`?**
+
+```{r}
+exp(model$coefficients[[1]] + model$coefficients[[2]]*8)
+```
+
+**What is the estimated probability that someone survived if they paid $9 for the `Fare`?**
+
+```{r}
+exp(model$coefficients[[1]] + model$coefficients[[2]]*9)
+```
+
+**Interpret the estimated coefficients.**
+
+
+
+**How does R calculate significance for the coefficients?**
+
+```{r}
+beta0 <- 1
+beta1 <- 1
+beta0.se <- 1
+beta1.se <- 1
+
+beta0.z <- 1
+beta1.z <- 1
+
+beta0.z <- 1
+beta1.z <- 1
+```
+
+
+**What hypotheses are tested with the Wald-test?**
+
+
+**How does R calculate confidence intervals for coefficients? **
+
+**Interpret the following graph**
+
+```{r}
+ggplot(train,aes(x=Fare,y=Survived))+
+  geom_point()+
+  geom_smooth(data=train,method = "glm", 
+    method.args = list(family = "binomial"), 
+    se = FALSE)
+```
+
+**Add `Age` as a predictor. Does the model fit improve?**
+
+```{r}
+model.age <- glm(Survived ~ Fare + Age, family = binomial, data = train)
+```
+
+**Make a residual plot. Comment on the trend.**
+
+```{r}
+plot(model.age)
+```

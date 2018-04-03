@@ -1,0 +1,70 @@
+---
+title: "Logistic Regression"
+subtitle: Statistical Inference II
+author: 
+- "Mine Dogucu"
+- "Noah Johnson"
+date: "April 3, 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(install.load)
+install_load('tidyverse')
+```
+
+## Logistic Regression as GLM
+
+## Random Component
+
+## Systematic Component
+
+## Link function
+
+## Example 1
+
+### Research Question
+
+### Odds
+
+### Logits
+
+### Empirical Logit Plot
+
+### Transforming Back
+
+### Likelihood Estimation
+
+## On R
+```{r}
+saves <- c(rep("1", 41), rep("0", 163))
+behind <- c(rep("1", 2), rep("0", 39))
+```
+
+## Example 2
+
+We will be using the **Putts1.csv** dataset for this example. The dataset comes from a golf game and has two variables **Length** which is the distance in feet from the cup (i.e. length of putt) and *Made* variable shows whether the ball made it to the cup or not.
+
+Using this dataset, fit a binomial logistic regression model. Interpret the exponents and plot the following empirical logit plot.
+
+```{r}
+putts <- read.csv(file="Putts1.csv")
+model <- glm(Made ~ Length, family = binomial, data = putts)
+summary(model)
+```
+
+the coefficients INTERPRET
+
+```{r}
+# Plot the empirical logit plot
+plot(model)
+
+#putts.tan
+
+b_0 <- exp(3.25684)
+b_1 <- exp(3.25684 - 0.56614)
+
+odds_ratio <- exp(0.56614)
+```
